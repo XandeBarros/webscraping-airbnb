@@ -59,15 +59,16 @@ for index, link in enumerate(links_para_processar):
   )
   # Nota = driver.find_element(By.XPATH, '//*[@id="site-content"]/div/div[1]/div[3]/div/div[1]/div/div[2]/div/div/div/a/div/div[6]/div[1]')
   Nota = Nota.text
-
   
   Valor = WebDriverWait(driver, timeout).until(
-    EC.presence_of_element_located((By.CSS_SELECTOR, 'span[class="_11jcbg2"]'))
+    EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'span[class="_j1kt73"]'))
   )
   # Valor = driver.find_element(By.CSS_SELECTOR, 'span[class="_11jcbg2"]')
-  Valor = Valor.text
-  print(Valor)
-
+  try:
+    Valor[1]
+    Valor = Valor[1].text
+  except IndexError:
+    Valor = "Essas datas não estão disponíveis"
   # time.sleep(5)
 
   ActionChains(driver).scroll_by_amount(0, 1400).perform()
